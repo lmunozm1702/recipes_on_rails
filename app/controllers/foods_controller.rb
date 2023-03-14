@@ -1,5 +1,6 @@
 class FoodsController < ApplicationController
   before_action :set_food, only: %i[show edit update destroy]
+  before_action :set_unit_type, only: %i[new index create show destroy]
 
   # GET /foods or /foods.json
   def index
@@ -52,6 +53,10 @@ class FoodsController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def food_params
-    params.require(:food).permit(:name, :measurement_unit, :price, :quantity, :user_id)
+    params.require(:food).permit(:name, :unit, :price, :quantity, :user_id)
+  end
+
+  def set_unit_type
+    @unit_type = Food.unit_types.keys.map { |type| [type.humanize, type] }
   end
 end
