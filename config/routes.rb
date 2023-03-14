@@ -6,5 +6,5 @@ Rails.application.routes.draw do
   # devise_scope :user do
   #   root to: "devise/sessions#new"
   # end
-  resources :recipes, only: [:index, :show]
+  resources :recipes, only: [:index, :show, :destroy]
 end

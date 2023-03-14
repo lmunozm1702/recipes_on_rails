@@ -8,7 +8,7 @@
             <%= link_to(recipe_path(recipe)) do %>
               <h3 class="p-0"><%= recipe.name%></h3>
             <% end %> 
-            <button class='btn btn-danger mt-2'>Remove</button>
+            <%= button_to "Remove", recipe_path(recipe), class: "btn btn-danger btn-sm", method: :delete %>
           </div>
           <div class='m-2'>
             <h5 class='mb-0'>Description for the Recipe:</h5> 
