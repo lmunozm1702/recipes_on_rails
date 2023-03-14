@@ -9,8 +9,15 @@
     <%= javascript_importmap_tags %>
   </head>
   <body>
-    <p class="notice"><%= notice %></p>
-    <p class="alert"><%= alert %></p>
-    <%= yield %>
+    <div class="container p-4">
+      <% if user_signed_in? %>
+        <div class="text-end mb-2">
+          welcome <%=current_user.name%> <small class="text-muted"><%=current_user.email%></small> <%= button_to "logout", destroy_user_session_path, method: :delete, class: 'btn btn-outline-secondary btn-sm' %>
+        </div>
+      <% end %>
+      <%= render partial: 'layouts/notice_flash_message', locals: { notice: notice } if notice %>
+      <%= render partial: 'layouts/alert_flash_message', locals: { notice: notice } if alert %>
+      <%= yield %>
+    </div>
   </body>
 </html>
