@@ -15,8 +15,8 @@
       <%= form.text_field :name, class: "form-control" %>
     </div>
     <div>
-      <%= form.label :measurement_unit, class: "form-label" %>
-      <%= form.text_field :measurement_unit, class: "form-control" %>
+      <%= form.label :unit, class: "form-label" %>
+      <%= form.select :unit, @unit_type, {}, class: "form-select" %>
     </div>
     <div>
       <%= form.label :price, class: "form-label" %>
