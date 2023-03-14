@@ -1,9 +1,2 @@
-<h1>New food</h1>
-
+<%= render partial: 'layouts/section_title', locals: { section_title: 'New Food' } %>
 <%= render "form", food: @food %>
-
-<br>
-
-<div>
-  <%= link_to "Back to foods", foods_path %>
-</div>
