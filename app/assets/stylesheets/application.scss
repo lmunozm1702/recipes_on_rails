@@ -14,3 +14,12 @@
  *= require_self
  */
 @import "bootstrap";
+
+.toggle-public {
+  opacity: 0;
+  position: relative;
+  width: 30px;
+  height: 16px;
+  top: 4px;
+  left: -39px;
+}

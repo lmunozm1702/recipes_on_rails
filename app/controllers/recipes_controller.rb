@@ -1,5 +1,6 @@
 class RecipesController < ApplicationController
-  before_action :set_recipe, only: %i[show destroy]
+  before_action :authenticate_user!
+  before_action :set_recipe, only: %i[show update destroy]
 
   def index
     @recipes = current_user.recipes
@@ -20,6 +21,15 @@ class RecipesController < ApplicationController
       redirect_to recipe_path(@recipe)
     else
       render 'new'
+    end
+  end
+
+  def update
+    @recipe.public = !@recipe.public
+    if @recipe.save
+      redirect_to recipe_path(@recipe)
+    else
+      render 'edit'
     end
   end
 

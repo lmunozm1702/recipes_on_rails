@@ -1,10 +1,41 @@
-<div class='container'>
-<div class="card">
-        <div class="card-body d-flex flex-column align-items-start">
-<h1 class='align-self-center'><%=@recipe.name%></h1>
-<h6 class='m-3'>Preparation time: <%=@recipe.preparation_time%><h6>
-<h6 class='m-3'>Cooking time: <%=@recipe.cooking_time%><h6>
-<h6 class='m-3'>Steps go here ... </h6>
-</div>
-</div>
+<div class='container d-flex flex-column align-items-start'>
+  <h1 class='align-self-center'><%=@recipe.name%></h1>
+  <div class='d-flex justify-content-between w-100'>
+    <h6 class='m-3'>Preparation time: <%=@recipe.preparation_time%><h6>
+    <div class="form-check form-switch m-2 d-flex">
+        <p class='mx-5'>Public</p>
+        <%= form_with(model: @recipe, url: recipe_path(@recipe), method: :patch, local: true) do |f| %>
+          <%= f.check_box :public, { class: "form-check-input", role: "switch", checked: @recipe.public } %>
+          <%= f.submit "", class: 'toggle-public'%>
+        <% end %>
+    </div>
+  </div>
+  <h6 class='m-3'>Cooking time: <%=@recipe.cooking_time%><h6>
+  <h6 class='m-3'>Steps go here ... </h6>
+  <%if @recipe.public%>
+  <div class='d-flex justify-content-between w-100 my-5 mx-2'>
+    <button class='btn btn-primary mx-5'>Generate shopping list</button>
+    <button class='btn btn-primary mx-5'>Add ingredient</button>
+  </div>
+  <table class="m-3 table table-striped table-bordered">
+    <thead>
+      <tr>
+        <th scope="col">Food</th>
+        <th scope="col">Quantity</th>
+        <th scope="col">Value</th>
+        <th scope="col">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+    <% @recipe.user.foods.list_all_foods.each do |food| %>
+      <tr>
+        <td><%= food.name%></td>
+        <td><%= food.quantity.to_s + food.measurement_unit%></td>
+        <td><%="$#{food.quantity * food.price}"%></td>
+        <td>Modify  Remove</td>
+      </tr>
+    <% end %>
+    </tbody>
+  </table>
+  <%end%>
 </div>

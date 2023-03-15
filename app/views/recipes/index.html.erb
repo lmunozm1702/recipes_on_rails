@@ -1,4 +1,8 @@
 <div class="container">
+  <% if @recipes.empty?%>
+    <h1>You don't have any recipes yet</h1>
+    <%= link_to 'New Recipe', new_recipe_path, class: 'btn btn-primary'%>
+  <%end%>
   <ul class="list-group w-50 mx-auto">
   <%@recipes.each do |recipe| %>
     <li class='list-group-item border-0 m-2'>
@@ -7,8 +11,10 @@
           <div>
             <%= link_to(recipe_path(recipe)) do %>
               <h3 class="p-0"><%= recipe.name%></h3>
-            <% end %> 
+            <% end %>
+            <%if current_user.id == recipe.user_id%> 
             <%= button_to "Remove", recipe_path(recipe), class: "btn btn-danger btn-sm", method: :delete %>
+            <%end%>
           </div>
           <div class='m-2'>
             <h5 class='mb-0'>Description for the Recipe:</h5> 
