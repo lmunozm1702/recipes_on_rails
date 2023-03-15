@@ -3,7 +3,7 @@
     <h1>You don't have any recipes yet</h1>
     <%= link_to 'New Recipe', new_recipe_path, class: 'btn btn-primary'%>
   <%end%>
-  <ul class="list-group w-50 mx-auto">
+  <ul class="list-group w-75 mx-auto">
   <%@recipes.each do |recipe| %>
     <li class='list-group-item border-0 m-2'>
       <div class="card">

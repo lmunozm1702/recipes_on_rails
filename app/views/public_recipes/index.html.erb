@@ -1,0 +1,31 @@
+<div class='container d-flex flex-column align-items-center'>
+  <h1>Public Recipes</h1>
+  <ul class="list-group w-75">
+  <%@public_recipes.each do |recipe| %>
+    <li class='list-group-item border-0 m-2'>
+      <div class="card">
+        <div class="card-body d-flex justify-content-around">
+          <div>
+            <% if current_user.id == recipe.user_id%>
+            <%= link_to(recipe_path(recipe)) do %>
+              <h3 class="p-0"><%= recipe.name%></h3>
+            <% end %>
+            <%else%>
+              <h3 class="p-0"><%= recipe.name%></h3>
+            <%end%>
+            <h5>By: <%= recipe.user.name%></h5>
+          </div>
+          <div class='m-2'>
+            <h5 class='mb-0'>Total food items: <%= recipe.user.foods.length%></h5> 
+            <% recipe.user.foods.each do |food| %>
+              <% @total = (@total || 0) + food.quantity * food.price %>
+            <% end %>
+            <h5 class='mb-0'>Total price: $<%=@total%></h5>
+            <% @total = 0%> 
+          </div>
+        </div>
+      </div>
+    </li>
+  <% end %>
+  </ul>
+</div>

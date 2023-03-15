@@ -2,20 +2,24 @@
   <h1 class='align-self-center'><%=@recipe.name%></h1>
   <div class='d-flex justify-content-between w-100'>
     <h6 class='m-3'>Preparation time: <%=@recipe.preparation_time%><h6>
+    <% if @recipe.user_id == current_user.id %>
     <div class="form-check form-switch m-2 d-flex">
         <p class='mx-5'>Public</p>
-        <%= form_with(model: @recipe, url: recipe_path(@recipe), method: :patch, local: true) do |f| %>
+        <%=form_with(model: @recipe, url: recipe_path(@recipe), method: :patch, local: true) do |f| %>
           <%= f.check_box :public, { class: "form-check-input", role: "switch", checked: @recipe.public } %>
           <%= f.submit "", class: 'toggle-public'%>
         <% end %>
     </div>
+    <%end%>
   </div>
   <h6 class='m-3'>Cooking time: <%=@recipe.cooking_time%><h6>
   <h6 class='m-3'>Steps go here ... </h6>
-  <%if @recipe.public%>
+  <%if @recipe.public || @recipe.user_id == current_user.id%>
   <div class='d-flex justify-content-between w-100 my-5 mx-2'>
     <button class='btn btn-primary mx-5'>Generate shopping list</button>
-    <button class='btn btn-primary mx-5'>Add ingredient</button>
+    <%if @recipe.user_id == current_user.id%>
+      <%=link_to 'Add ingredient', new_food_path, class: 'btn btn-primary mx-5'%>
+    <%end%>
   </div>
   <table class="m-3 table table-striped table-bordered">
     <thead>
