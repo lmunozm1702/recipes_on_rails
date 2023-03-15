@@ -30,7 +30,7 @@
     <% @recipe.user.foods.list_all_foods.each do |food| %>
       <tr>
         <td><%= food.name%></td>
-        <td><%= food.quantity.to_s + food.measurement_unit%></td>
+        <td><%= food.quantity.to_s + food.unit%></td>
         <td><%="$#{food.quantity * food.price}"%></td>
         <td>Modify  Remove</td>
       </tr>
