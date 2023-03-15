@@ -11,7 +11,7 @@
   <%= f.number_field :cooking_time, class: "form-control", step: '0.1', placeholder: 'Cooking time in hours' %>
   </div>
   <div class="input-group mb-3">
-  <%= f.text_field :description, class: "form-control", step: '0.1', placeholder: 'Description' %>
+  <%= f.text_field :description, class: "form-control", placeholder: 'Description' %>
   </div>
   <%= f.hidden_field :user_id, value: current_user.id %>
   <%= f.submit class: "btn btn-primary"%>
