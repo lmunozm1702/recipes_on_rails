@@ -16,9 +16,9 @@
             <h5>By: <%= recipe.user.name%></h5>
           </div>
           <div class='m-2'>
-            <h5 class='mb-0'>Total food items: <%= recipe.user.foods.length%></h5> 
-            <% recipe.user.foods.each do |food| %>
-              <% @total = (@total || 0) + food.quantity * food.price %>
+            <h5 class='mb-0'>Total food items: <%= recipe.recipe_foods.length%></h5> 
+            <% recipe.recipe_foods.each do |recipe_food| %>
+              <% @total = (@total || 0) + recipe_food.quantity * recipe_food.food.price %>
             <% end %>
             <h5 class='mb-0'>Total price: $<%=@total%></h5>
             <% @total = 0%> 
