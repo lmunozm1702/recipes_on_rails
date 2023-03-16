@@ -36,7 +36,7 @@
         <td><%= recipe.food.name%></td>
         <td><%= recipe.quantity.to_s + recipe.food.unit%></td>
         <td><%="$#{recipe.quantity * recipe.food.price}"%></td>
-        <td>Modify  Remove</td>
+        <td><%= button_to "Remove", url_for([recipe]), class: "btn btn-danger btn-sm", method: :delete %></td>
       </tr>
     <% end %>
     </tbody>
