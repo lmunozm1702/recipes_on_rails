@@ -18,7 +18,7 @@
   <div class='d-flex justify-content-between w-100 my-5 mx-2'>
     <button class='btn btn-primary mx-5'>Generate shopping list</button>
     <%if @recipe.user_id == current_user.id%>
-      <%=link_to 'Add ingredient', new_food_path, class: 'btn btn-primary mx-5'%>
+      <%=link_to 'Add ingredient', new_recipe_food_path(recipe_id: @recipe.id), class: 'btn btn-primary mx-5'%>
     <%end%>
   </div>
   <table class="m-3 table table-striped table-bordered">
@@ -31,12 +31,12 @@
       </tr>
     </thead>
     <tbody>
-    <% @recipe.user.foods.list_all_foods.each do |food| %>
+    <% @recipe.recipe_foods.each do |recipe| %>
       <tr>
-        <td><%= food.name%></td>
-        <td><%= food.quantity.to_s + food.unit%></td>
-        <td><%="$#{food.quantity * food.price}"%></td>
-        <td>Modify  Remove</td>
+        <td><%= recipe.food.name%></td>
+        <td><%= recipe.quantity.to_s + recipe.food.unit%></td>
+        <td><%="$#{recipe.quantity * recipe.food.price}"%></td>
+        <td><%= button_to "Remove", url_for([recipe]), class: "btn btn-danger btn-sm", method: :delete %></td>
       </tr>
     <% end %>
     </tbody>

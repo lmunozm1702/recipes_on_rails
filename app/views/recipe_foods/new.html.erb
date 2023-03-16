@@ -1,0 +1,12 @@
+<h1>New Ingredient</h1>
+
+<%= form_with(model: [@recipe_food], url: recipe_foods_path, local: true) do |f| %>
+  <div class="input-group mb-3">
+    <%= f.select :food_id, options_for_select(Food.list_all_foods.map { |food| [food.name, food.id] }), {}, class: "form-select" %>
+  </div>
+  <div class="input-group mb-3">
+    <%= f.number_field :quantity, class: "form-control", placeholder: 'Quantity' %>
+  </div>
+  <%= f.hidden_field :recipe_id, value: @recipe.id %>
+  <%= f.submit class: "btn btn-primary"%>
+<% end %>
