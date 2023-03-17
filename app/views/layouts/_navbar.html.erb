@@ -25,7 +25,7 @@
           </ul>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Shopping List</a>
+          <%= link_to "General Shopping List", general_shopping_path, class: "nav-link" %>
         </li>
       </ul>
       <% if user_signed_in? %>
