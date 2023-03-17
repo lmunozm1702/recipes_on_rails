@@ -1,12 +1,17 @@
-<h1>New Ingredient</h1>
-
+<%= render partial: 'layouts/section_title', locals: { section_title: "Add Ingredient" } %>
 <%= form_with(model: [@recipe_food], url: recipe_foods_path, local: true) do |f| %>
-  <div class="input-group mb-3">
-    <%= f.select :food_id, options_for_select(Food.list_all_foods.map { |food| [food.name, food.id] }), {}, class: "form-select" %>
+  <div class="d-flex flex-column gap-3">
+    <div>
+      <%= f.label :food_id, class: "form-label" %>
+      <%= f.select :food_id, options_for_select(Food.list_all_foods.map { |food| [food.name, food.id] }), {}, class: "form-select" %>
+    </div>
+    <div>
+      <%= f.label :quantity, class: "form-label" %>
+      <%= f.number_field :quantity, class: "form-control", placeholder: 'Quantity' %>
+    </div>
+    <%= f.hidden_field :recipe_id, value: @recipe.id %>
+    <div class="text-end mt-3">
+      <%= f.submit class: "btn btn-primary btn-sm"%>
+    </div>
   </div>
-  <div class="input-group mb-3">
-    <%= f.number_field :quantity, class: "form-control", placeholder: 'Quantity' %>
-  </div>
-  <%= f.hidden_field :recipe_id, value: @recipe.id %>
-  <%= f.submit class: "btn btn-primary"%>
 <% end %>
