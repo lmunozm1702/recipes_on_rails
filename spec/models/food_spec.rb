@@ -16,12 +16,12 @@ RSpec.describe Recipe, type: :model do
       expect(@recipe.recipe_foods).to include(recipe_food)
     end
 
-    it "returns all foods in alphabetical order" do
+    it 'returns all foods in alphabetical order' do
       @user = User.create(email: 'a@a', password: '123456')
       @food = Food.create(name: 'Doro', user_id: @user.id, unit: 'grams', quantity: 1)
       @food2 = Food.create(name: 'Doro', user_id: @user.id, unit: 'grams', quantity: 1)
       foods = Food.list_all_foods
-      
+
       expect(foods).to eq(foods.reverse)
     end
   end

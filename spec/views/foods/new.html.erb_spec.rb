@@ -23,7 +23,7 @@ RSpec.describe 'Food new test', type: :feature do
     end
 
     it 'should render the bact to foods button' do
-      expect(page).to have_link("Back to foods", href: foods_path, class: "btn btn-secondary btn-sm")
+      expect(page).to have_link('Back to foods', href: foods_path, class: 'btn btn-secondary btn-sm')
     end
   end
 end
