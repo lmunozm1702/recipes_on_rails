@@ -4,6 +4,10 @@ Rails.application.routes.draw do
   resources :public_recipes, only: [:index]
   resources :recipe_foods, only: [:new, :create, :destroy]
   devise_for :users
+
+  resources :recipes do
+    get ":id/shopping", to: "recipes#shopping", on: :collection
+  end
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Defines the root path route ("/")
