@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'public_recipes/index.html.erb', type: :feature do
+RSpec.describe 'Recipe index test', type: :feature do
   describe 'when user is signed in' do
     include Devise::Test::IntegrationHelpers
 
@@ -10,8 +10,8 @@ RSpec.describe 'public_recipes/index.html.erb', type: :feature do
       @user.confirm
       sign_in @user
       find('input[type="submit"]').click
-      @recipe = Recipe.create(name: 'Doro', user: @user, public: true)
-      visit public_recipes_path
+      @recipe = Recipe.create(name: 'Doro', user: @user)
+      visit recipes_path
     end
 
     it 'should display the user\'s username' do
@@ -26,16 +26,12 @@ RSpec.describe 'public_recipes/index.html.erb', type: :feature do
       expect(page).to have_content(@recipe.name)
     end
 
-    it 'should display the total food item' do
-      expect(page).to have_content('Total food items: 0')
+    it 'should display the description' do
+      expect(page).to have_content('Description for the Recipe')
     end
 
-    it 'should display the total price' do
-      expect(page).to have_content('Total price: $')
-    end
-
-    it 'should display the owner\'s name' do
-      expect(page).to have_content('By:')
+    it 'should display a remove button' do
+      expect(page).to have_content('Remove')
     end
   end
 end

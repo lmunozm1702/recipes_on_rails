@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'recipe_foods/new.html.erb', type: :feature do
+RSpec.describe 'Recipe new test', type: :feature do
   describe 'when user is signed in' do
     include Devise::Test::IntegrationHelpers
 
@@ -11,15 +11,15 @@ RSpec.describe 'recipe_foods/new.html.erb', type: :feature do
       sign_in @user
       find('input[type="submit"]').click
       @recipe = Recipe.create(name: 'Doro', user: @user)
-      visit new_recipe_food_path(recipe_id: @recipe.id)
+      visit new_recipe_path
     end
 
     it 'should render the new recipe page' do
-      expect(page).to have_content('New Ingredient')
+      expect(page).to have_content('New Recipe')
     end
 
     it 'should render the create recipe button' do
-      expect(page).to have_selector('input[type="submit"][value="Create Recipe food"].btn.btn-primary')
+      expect(page).to have_selector('input[type="submit"][value="Create Recipe"].btn.btn-primary')
     end
   end
 end
