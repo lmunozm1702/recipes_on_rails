@@ -46,16 +46,16 @@ class RecipesController < ApplicationController
       @total_price = 0
       @items_to_buy = 0
 
-      recipe_food.class.module_eval { attr_accessor :total, :food_name}
+      recipe_food.class.module_eval { attr_accessor :total, :food_name }
       recipe_food.food_name = @this_food.name
       if recipe_food.quantity > @this_food.quantity
         recipe_food.quantity -= @this_food.quantity
-        recipe_food.total = recipe_food.quantity * @this_food.price   
+        recipe_food.total = recipe_food.quantity * @this_food.price
         @total_price += recipe_food.total
         @items_to_buy += 1
       else
         recipe_food.quantity = 0
-        recipe_food.class.module_eval { attr_accessor :total, :food_name}
+        recipe_food.class.module_eval { attr_accessor :total, :food_name }
         recipe_food.total = 0
       end
     end
