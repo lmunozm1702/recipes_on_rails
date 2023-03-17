@@ -1,32 +1,37 @@
 require 'rails_helper'
 
-RSpec.describe 'foods/index', type: :view do
-  before(:each) do
-    assign(:foods, [
-             Food.create!(
-               name: 'Name',
-               measurement_unit: 'Measurement Unit',
-               price: 2,
-               quantity: 3,
-               user: nil
-             ),
-             Food.create!(
-               name: 'Name',
-               measurement_unit: 'Measurement Unit',
-               price: 2,
-               quantity: 3,
-               user: nil
-             )
-           ])
-  end
+RSpec.describe 'Food index test', type: :feature do
+  describe 'when user is signed in' do
+    include Devise::Test::IntegrationHelpers
 
-  it 'renders a list of foods' do
-    render
-    cell_selector = Rails::VERSION::STRING >= '7' ? 'div>p' : 'tr>td'
-    assert_select cell_selector, text: Regexp.new('Name'.to_s), count: 2
-    assert_select cell_selector, text: Regexp.new('Measurement Unit'.to_s), count: 2
-    assert_select cell_selector, text: Regexp.new(2.to_s), count: 2
-    assert_select cell_selector, text: Regexp.new(3.to_s), count: 2
-    assert_select cell_selector, text: Regexp.new(nil.to_s), count: 2
+    before :each do
+      @user = User.create(email: 'aa@a', password: '123456')
+      visit new_user_session_path
+      @user.confirm
+      sign_in @user
+      find('input[type="submit"]').click
+      @food = Food.create(name: 'Doro', user: @user, unit: 'grams', quantity: 1)
+      visit foods_path
+    end
+
+    it 'should display the user\'s username' do
+      expect(page).to have_content(@user.email)
+    end
+
+    it 'should display the user\'s name' do
+      expect(page).to have_content(@user.name)
+    end
+
+    it 'should display the food name' do
+      expect(page).to have_content(@food.name)
+    end
+
+    it 'should display the measurement unit' do
+      expect(page).to have_content(@food.unit)
+    end
+
+    it 'should display the quantity' do
+      expect(page).to have_content(@food.quantity)
+    end
   end
 end

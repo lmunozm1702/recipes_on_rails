@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'Recipe index test', type: :feature do
+RSpec.describe 'Recipe show test', type: :feature do
   describe 'when user is signed in' do
     include Devise::Test::IntegrationHelpers
 

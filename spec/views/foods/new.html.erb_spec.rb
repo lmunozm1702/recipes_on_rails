@@ -1,29 +1,29 @@
 require 'rails_helper'
 
-RSpec.describe 'foods/new', type: :view do
-  before(:each) do
-    assign(:food, Food.new(
-                    name: 'MyString',
-                    measurement_unit: 'MyString',
-                    price: 1,
-                    quantity: 1,
-                    user: nil
-                  ))
-  end
+RSpec.describe 'Food new test', type: :feature do
+  describe 'when user is signed in' do
+    include Devise::Test::IntegrationHelpers
 
-  it 'renders new food form' do
-    render
+    before :each do
+      @user = User.create(email: 'aa@a', password: '123456')
+      visit new_user_session_path
+      @user.confirm
+      sign_in @user
+      find('input[type="submit"]').click
+      @food = Food.create(name: 'Doro', user: @user, unit: 'grams', quantity: 1)
+      visit new_food_path
+    end
 
-    assert_select 'form[action=?][method=?]', foods_path, 'post' do
-      assert_select 'input[name=?]', 'food[name]'
+    it 'should render the new food page' do
+      expect(page).to have_content('New Food')
+    end
 
-      assert_select 'input[name=?]', 'food[measurement_unit]'
+    it 'should render the create food button' do
+      expect(page).to have_selector('input[type="submit"][value="Create Food"].btn.btn-primary')
+    end
 
-      assert_select 'input[name=?]', 'food[price]'
-
-      assert_select 'input[name=?]', 'food[quantity]'
-
-      assert_select 'input[name=?]', 'food[user_id]'
+    it 'should render the bact to foods button' do
+      expect(page).to have_link("Back to foods", href: foods_path, class: "btn btn-secondary btn-sm")
     end
   end
 end
