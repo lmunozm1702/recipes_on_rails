@@ -7,7 +7,7 @@ RSpec.describe 'PublicRecipes', type: :request do
       @user = User.create(email: 'a@a', password: '123456')
       sign_in @user
     end
-  
+
     describe 'GET /index' do
       it 'returns http success' do
         get '/public_recipes/index'
