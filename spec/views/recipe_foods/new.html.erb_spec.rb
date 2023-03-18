@@ -15,7 +15,7 @@ RSpec.describe 'recipe_foods/new.html.erb', type: :feature do
     end
 
     it 'should render the new recipe page' do
-      expect(page).to have_content('New Ingredient')
+      expect(page).to have_content('Add Ingredient')
     end
 
     it 'should render the create recipe button' do
