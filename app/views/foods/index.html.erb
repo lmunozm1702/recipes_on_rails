@@ -1,0 +1,29 @@
+<%= render partial: 'layouts/section_title', locals: { section_title: 'Foods' } %>
+<div class="text-end"><%= link_to "New food", new_food_path, class: "btn btn-secondary btn-sm" %></div>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th scope="col">Food</th>
+      <th scope="col">Mesurement unit</th>
+      <th scope="col">Unit price</th>
+      <th scope="col">Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% if !@foods.any? %>
+      <tr>
+        <td colspan="4">No foods added.</td>
+      </tr>
+    <% else %>
+      <% @foods.each do |food| %>
+        <tr>
+          <td><%=food.name%></td>
+          <td><%=food.unit%></td>
+          <td>$ <%=food.price%></td>
+          <td><%= button_to "delete", food, method: :delete, class: "btn btn-outline-secondary btn-sm" %></td>
+        </tr>
+      <% end %>
+    <% end %>
+  </tbody>
+</table>
+<%#= link_to "Show this food", food %>

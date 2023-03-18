@@ -1,0 +1,25 @@
+<%= render partial: 'layouts/section_title', locals: { section_title: "Recipes List" } %>
+<% if @recipes.empty?%>
+  <h1>You don't have any recipes yet</h1>
+  <%= link_to 'New Recipe', new_recipe_path, class: 'btn btn-primary btn-sm'%>
+<%end%>
+<ul class="list-group">
+  <%@recipes.each do |recipe| %>
+    <li class='list-group-item border-0 m-2'>
+      <div class="card">
+        <div class="card-body d-flex justify-content-between mx-5">
+          <div class="flex-fill">
+            <%= link_to recipe.name, recipe_path(recipe), class: 'fs-3 link-primary'%>
+            <%if current_user.id == recipe.user_id%>
+              <%= button_to "Remove", recipe_path(recipe), class: "btn btn-danger btn-sm mt-3", method: :delete %>
+            <%end%>
+          </div>
+          <div class="flex-fill">
+            <div class="text-muted">Description for the Recipe:</div>
+            <div><%=recipe.description%></div>
+          </div>
+        </div>
+      </div>
+    </li>
+  <% end %>
+</ul>

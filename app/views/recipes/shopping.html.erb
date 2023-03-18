@@ -1,0 +1,29 @@
+<%= render partial: 'layouts/section_title', locals: { section_title: 'Shopping List' } %>
+<div class="d-flex justify-content-around my-3">
+  <div>Amount of food items to buy: <%= @items_to_buy %></div>
+  <div>Total value of food needed: <%= @total_price %></div>
+</div>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th scope="col">Food</th>
+      <th scope="col">Quantity</th>
+      <th scope="col">Price</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% if !@shopping_list.any? %>
+      <tr>
+        <td colspan="4">No foods needed.</td>
+      </tr>
+    <% else %>
+      <% @shopping_list.each do |recipe_food| %>
+        <tr>
+          <td><%=recipe_food.food_name%></td>
+          <td><%=recipe_food.quantity%></td>
+          <td><%=recipe_food.total%></td>
+        </tr>
+      <% end %>
+    <% end %>
+  </tbody>
+</table>

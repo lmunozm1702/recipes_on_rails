@@ -1,0 +1,23 @@
+<%= render partial: 'layouts/section_title', locals: { section_title: 'Log in' } %>
+<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+  <div class="field">
+    <%= f.label :email, class: "form-label" %><br />
+    <%= f.email_field :email, class: "form-control", autofocus: true, autocomplete: "email" %>
+  </div>
+  <div class="field">
+    <%= f.label :password, class: "form-label" %><br />
+    <%= f.password_field :password, class: "form-control", autocomplete: "current-password" %>
+  </div>
+  <% if devise_mapping.rememberable? %>
+    <div class="field form-check">
+      <%= f.check_box :remember_me, class: "form-check-input" %>
+      <%= f.label :remember_me, class: "form-check-label" %>
+    </div>
+  <% end %>
+  <div class="actions text-end">
+    <%= f.submit("Log In",class: "btn btn-primary")%>
+  </div>
+<% end %>
+<div class="text-end mt-2">
+  <%= render "devise/shared/links" %>
+</div>

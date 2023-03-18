@@ -1,0 +1,27 @@
+<%= render partial: 'layouts/section_title', locals: { section_title: 'Public Recipes' } %>
+<div class='d-flex flex-column'>
+  <ul class="list-group">
+    <%@public_recipes.each do |recipe| %>
+      <li class='list-group-item border-0 m-2'>
+        <div class="card">
+          <div class="card-body d-flex justify-content-between">
+            <div class="flex-fill">
+              <%= link_to recipe.name, recipe_path(recipe), class: 'fs-3 link-primary'%>
+              <div class="text-muted">By: <%= recipe.user.name%></div>
+            </div>
+            <div class="d-flex flex-column justify-content-center align-items-start">
+              <div>Total food items: <%= recipe.recipe_foods.length%></div>
+              <% @total = 0%>
+              <% recipe.recipe_foods.each do |recipe_food| %>
+                <%unless recipe_food.quantity.nil?%>
+                <% @total += recipe_food.quantity * recipe_food.food.price %>
+                <%end%>
+              <% end %>
+              <div>Total price: $<%=@total%></div>
+            </div>
+          </div>
+        </div>
+      </li>
+    <% end %>
+  </ul>
+</div>

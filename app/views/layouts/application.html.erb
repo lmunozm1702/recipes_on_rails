@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>RecipesOnRails</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <%= javascript_importmap_tags %>
+  </head>
+  <body>
+    <%= render partial: 'layouts/navbar' %>
+    <div class="container p-4">
+      <%= render partial: 'layouts/notice_flash_message', locals: { notice: notice } if notice %>
+      <%= render partial: 'layouts/alert_flash_message', locals: { notice: notice } if alert %>
+      <%= yield %>
+    </div>
+  </body>
+</html>
