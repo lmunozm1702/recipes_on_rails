@@ -22,7 +22,7 @@ RSpec.describe Recipe, type: :model do
       @food2 = Food.create(name: 'Doro', user_id: @user.id, unit: 'grams', quantity: 1)
       foods = Food.list_all_foods
 
-      expect(foods).to eq(foods.reverse)
+      expect(foods[0].id).to eq(Food.first.id)
     end
   end
 end

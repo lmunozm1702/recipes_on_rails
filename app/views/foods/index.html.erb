@@ -19,7 +19,7 @@
         <tr>
           <td><%=food.name%></td>
           <td><%=food.unit%></td>
-          <td><%=food.quantity%></td>
+          <td>$ <%=food.price%></td>
           <td><%= button_to "delete", food, method: :delete, class: "btn btn-outline-secondary btn-sm" %></td>
         </tr>
       <% end %>

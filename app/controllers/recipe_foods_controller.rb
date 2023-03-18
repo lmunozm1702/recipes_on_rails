@@ -45,7 +45,7 @@ class RecipeFoodsController < ApplicationController
                     food_id: this_food.id,
                     food_name: this_food.name,
                     quantity: this_food.quantity - quantity,
-                    price: (this_food.quantity - quantity) * price
+                    price: (this_food.quantity - quantity) * this_food.price
                   }
                 else
                   {
