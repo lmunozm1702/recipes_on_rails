@@ -37,7 +37,11 @@
         <tr>
           <td><%= recipe.food.name%></td>
           <td><%= recipe.quantity.to_s + recipe.food.unit%></td>
+          <%if recipe.quantity.nil?%>
+          <td><%='$0'%></td>
+          <%else%>
           <td><%="$#{recipe.quantity * recipe.food.price}"%></td>
+          <%end%>
           <td><%= button_to "Remove", url_for([recipe]), class: "btn btn-danger btn-sm", method: :delete %></td>
         </tr>
       <% end %>
